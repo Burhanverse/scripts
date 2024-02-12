@@ -12,6 +12,9 @@ git clone https://github.com/Burhanverse/DeviceTree -b cr11 device/xiaomi/lava
 # Source the build environment
 . build/envsetup.sh
 
+# Remove the FMRadio package
+rm -rf packages/apps/FMRadio
+
 # Choose the build target
 lunch lineage_lava-user
 
