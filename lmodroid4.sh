@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Initialize the repo
-repo init --depth=1 -u https://github.com/burhancodes/manifest.git -b thirteen --git-lfs
+repo init --depth=1 -u https://github.com/burhancodes/lmodroid.git -b thirteen --git-lfs
 # Sync the repo
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 
