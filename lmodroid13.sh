@@ -6,12 +6,12 @@ repo init --depth=1 -u https://github.com/burhancodes/lmodroid.git -b thirteen -
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 
 # Clone the device tree
-git clone https://github.com/burhancodes/device_lmodroid_lancelot -b 13 device/xiaomi/lancelot
+git clone --depth 1 https://github.com/burhancodes/device_lmodroid_lancelot -b 13 device/xiaomi/lancelot
 # Source the build environment
 . build/envsetup.sh
 
 # Choose the build target
-lunch lmodroid_lancelot-userdebug
+lunch lmodroid_lancelot-user
 
 # Start the build
 mka bacon
