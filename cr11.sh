@@ -6,9 +6,6 @@ repo init -u https://github.com/crdroidandroid/android.git -b 11.0 --git-lfs
 # Sync the repo
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 
-# Clone the device tree
-git clone https://github.com/Burhanverse/DeviceTree -b cr11 device/xiaomi/lava
-
 # Source the build environment
 . build/envsetup.sh
 
