@@ -7,9 +7,7 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 
 # device tree
 git clone --depth 1 https://github.com/burhancodes/device_xiaomi_lancelot -b ros device/xiaomi/lancelot
-repo sync -c -j $(nproc --all) --force-sync
 
 # build rom
 . build/envsetup.sh 
-lunch rising_lancelot-user 
-mka bacon
+lunch rising_lancelot-user && ascend
