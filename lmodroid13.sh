@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkkdir lmo
+cd lmo
 # Initialize the repo
 repo init --depth=1 -u https://github.com/burhancodes/lmodroid.git -b thirteen --git-lfs
 # Sync the repo
