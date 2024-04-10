@@ -1,36 +1,17 @@
 #!/bin/bash
 
-# Corrected mkdir command
-mkdir lmo
-cd lmo || exit # Exit if the directory doesn't exist
+rm -rf .repo/local_manifests
 
-# Initialize the repo
+# Initialize repo with specified manifest
 repo init --depth=1 -u https://github.com/burhancodes/lmodroid.git -b thirteen --git-lfs
-# Sync the repo
-repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j12
+# Clone local_manifests repository
+git clone https://github.com/burhancodes/local_manifest --depth 1 -b lmo13 .repo/local_manifests
 
-# Clone the device tree
-git clone --depth 1 https://github.com/burhancodes/device_lmodroid_lancelot -b 13 device/xiaomi/lancelot
+# Sync the repositories
+repo sync -c -j$(nproc --all) --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync
 
-# Use latest ZyC-Clang
-API_URL="https://api.github.com/repos/ZyCromerZ/Clang/releases/latest"
-TARGET_DIR="prebuilts/clang/host/linux-x86/zyc-clang"
-ASSET_URL=$(curl -s $API_URL | jq -r '.assets[0].browser_download_url')
-# Check if the URL is empty or not
-if [ -z "$ASSET_URL" ]; then
-    echo "Failed to find asset download URL."
-    exit 1
-fi
-# Download latest release
-curl -L -o latest_release.tar.gz "$ASSET_URL"
-mkdir -p "$TARGET_DIR"
-# Extract
-tar -xzf latest_release.tar.gz -C "$TARGET_DIR"
-# Clean up
-rm latest_release.tar.gz
-
-# Source the build environment
-. build/envsetup.sh
+# Set up build environment
+source build/envsetup.sh
 
 # Choose the build target
 lunch lmodroid_lancelot-user
