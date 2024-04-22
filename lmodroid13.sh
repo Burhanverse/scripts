@@ -21,7 +21,7 @@ if [ "$do_smallremove" = "yes" ]; then
 fi
 
 # Let's sync!
-/opt/crave/resync.sh
+../opt/crave/resync.sh
 
 # Do lunch
 . build/envsetup.sh
