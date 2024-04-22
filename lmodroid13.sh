@@ -9,7 +9,7 @@ do_smallremove=no
 repo init --depth=1 -u https://github.com/burhancodes/lmodroid.git -b thirteen --git-lfs
 
 # Clone local_manifests repository
-git clone https://github.com/burhancodes/local_manifest --depth 1 -b lmo13 .repo/local_manifests
+git clone https://github.com/burhancodes/local_manifest --depth 1 -b main .repo/local_manifests
 
 # Do remove here before repo sync.
 if [ "$do_cleanremove" = "yes" ]; then
