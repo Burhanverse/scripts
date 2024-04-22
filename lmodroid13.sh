@@ -8,6 +8,6 @@ export BUILD_USERNAME=Aqua && \
 export BUILD_HOSTNAME=CI && \
 export KBUILD_BUILD_USER=Aqua && \
 export KBUILD_BUILD_HOST=CI && \
-m bacon -j$(nproc --all)"
+m bacon"
 
 
