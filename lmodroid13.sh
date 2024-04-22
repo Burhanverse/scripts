@@ -1,36 +1,13 @@
-# Clean manifest
-#rm -rf .repo
+crave run --no-patch -- "rm -rf .repo/local_manifests && \
+repo init --depth=1 --no-repo-verify -u https://github.com/burhancodes/lmodroid.git -b thirteen --git-lfs && \
+git clone https://github.com/burhancodes/local_manifest --depth 1 -b main .repo/local_manifests && \
+/opt/crave/resync.sh && \
+source build/envsetup.sh && \
+lunch lmodroid_lancelot-user && \
+export BUILD_USERNAME=Aqua && \
+export BUILD_HOSTNAME=CI && \
+export KBUILD_BUILD_USER=Aqua && \
+export KBUILD_BUILD_HOST=CI && \
+m bacon -j$(nproc --all)"
 
-# Variable 
-do_cleanremove=no
-do_smallremove=no
 
-# Repo init the rom source.
-repo init --depth=1 -u https://github.com/burhancodes/lmodroid.git -b thirteen --git-lfs
-
-# Clone local_manifests repository
-git clone https://github.com/burhancodes/local_manifest --depth 1 -b main .repo/local_manifests
-
-# Do remove here before repo sync.
-if [ "$do_cleanremove" = "yes" ]; then
- rm -rf system out prebuilts external hardware packages
-fi
-
-if [ "$do_smallremove" = "yes" ]; then
- rm -rf out/host prebuilts
-fi
-
-# Let's sync!
-../opt/crave/resync.sh
-
-# Do lunch
-. build/envsetup.sh
-lunch lmodroid_lancelot-user
-
-export BUILD_USERNAME=Aqua
-export BUILD_HOSTNAME=CI
-export KBUILD_BUILD_USER=Aqua  
-export KBUILD_BUILD_HOST=CI
-
-# start build!
-m bacon -j$(nproc --all)
