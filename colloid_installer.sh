@@ -58,6 +58,29 @@ remove_old_directories() {
   done
 }
 
+# Uninstall the theme
+uninstall_theme() {
+  echo -e "${CYAN}Uninstalling Colloid Icon Theme...${NC}"
+  rm -rf ~/.local/share/icons/Colloid*
+  echo -e "${GREEN}Uninstallation completed.${NC}"
+  exit 0
+}
+
+# Action selection
+choose_action() {
+  echo -e "${YELLOW}Choose an action:${NC}"
+  echo -e "1) ${GREEN}Update/Install${NC}"
+  echo -e "2) ${RED}Full Uninstall${NC}"
+  echo -e -n "${MAGENTA}Enter your choice [1-2]: ${NC}"
+  read -r action_choice
+
+  case $action_choice in
+    1) echo -e "${GREEN}Proceeding with update/install...${NC}" ;;
+    2) uninstall_theme ;;
+    *) echo -e "${RED}Invalid choice! Exiting...${NC}"; exit 1 ;;
+  esac
+}
+
 # Colorscheme
 choose_scheme() {
   echo -e "${YELLOW}Choose a folder colorscheme variant:${NC}"
@@ -143,7 +166,8 @@ choose_notint() {
 }
 
 # Start script
-echo -e "${BLUE}Starting Colloid Icon Theme Installer...${NC}"
+echo -e "${BLUE}Starting Colloid Icon Theme Manager...${NC}"
+choose_action
 get_latest_release_tag
 choose_scheme
 choose_theme
