@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Prompt for city name
+read -p "Enter the city name: " city
+
+# Display the weather from wttr.in
+curl "https://wttr.in/$city"
